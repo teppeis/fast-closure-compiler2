@@ -5,7 +5,7 @@ ifeq ($(UNAME_S),Linux)
 endif
 ifeq ($(UNAME_S),Darwin)
 	OUTFILE = libNailgunTest.jnilib
-	CCFLAGS = -I${JAVA_HOME}/include -I${JAVA_HOME}/include/darwin
+	CCFLAGS = -I$(/usr/libexec/java_home)/include -I$(/usr/libexec/java_home)/include/darwin
 endif
 
 install: bin/$(OUTFILE) closure-compiler nailgun
@@ -24,11 +24,13 @@ closure-compiler:
 nailgun:
 	rm -fr temp
 	mkdir temp
-	cd temp && curl -OL https://github.com/martylamb/nailgun/archive/nailgun-all-0.9.1.zip && unzip nailgun-all-0.9.1.zip
-	cd temp/nailgun-nailgun-all-0.9.1 && make ng && cd nailgun-server && mvn package
+	cd temp && curl -OL https://github.com/martylamb/nailgun/archive/master.tar.gz && tar -xf master.tar.gz
+	sed -e 's/<source>1.4</source>/<source>1.8</source>/g' temp/nailgun-master/pom.xml
+	sed -e 's/<target>1.4</target>/<target>1.8</target>/g' temp/nailgun-master/pom.xml
+	cd temp/nailgun-master && make ng && cd nailgun-server && mvn package
 	mkdir nailgun
-	mv temp/nailgun-nailgun-all-0.9.1/nailgun-server/target/nailgun-server-0.9.1.jar nailgun/nailgun.jar
-	mv temp/nailgun-nailgun-all-0.9.1/ng nailgun/ng
+	mv temp/nailgun-master/nailgun-server/target/nailgun-server-0.9.2.jar nailgun/nailgun.jar
+	mv temp/nailgun-master/ng nailgun/ng
 	rm -fr temp
 
 clean:
