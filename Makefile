@@ -5,33 +5,39 @@ ifeq ($(UNAME_S),Linux)
 endif
 ifeq ($(UNAME_S),Darwin)
 	OUTFILE = libNailgunTest.jnilib
-	CCFLAGS = -I$(/usr/libexec/java_home)/include -I$(/usr/libexec/java_home)/include/darwin
+	CCFLAGS = -I$(shell /usr/libexec/java_home)/include -I$(shell /usr/libexec/java_home)/include/darwin
 endif
 
 install: bin/$(OUTFILE) closure-compiler nailgun
 
 bin/$(OUTFILE):
-	cd bin && javac NailgunTest.java && gcc NailgunTest.c -shared -o $(OUTFILE) $(CCFLAGS)
+	cd "bin" && javac "NailgunTest.java" && gcc "NailgunTest.c" -shared -o $(OUTFILE) $(CCFLAGS)
 
 closure-compiler:
-	rm -fr temp
-	mkdir temp
-	cd temp && curl -O https://dl.google.com/closure-compiler/compiler-latest.zip && unzip compiler-latest.zip
-	mkdir closure-compiler
-	mv temp/compiler.jar closure-compiler
-	rm -fr temp
+# Init bootstraping
+	rm -fr "tmp"; mkdir -p "tmp/closure-compiler"
+# Download latest Google Closure Compiler
+	curl -L -o "./tmp/compiler-latest.tgz" "https://dl.google.com/closure-compiler/compiler-latest.tar.gz" \
+		&& tar -xf "./tmp/compiler-latest.tgz" -C "./tmp/closure-compiler"
+# Move compiler.jar
+	mkdir "closure-compiler"
+	mv "./tmp/closure-compiler/compiler.jar" "./closure-compiler/"
+# Cleanup
+	rm -fr "tmp"
 
 nailgun:
-	rm -fr temp
-	mkdir temp
-	cd temp && curl -OL https://github.com/martylamb/nailgun/archive/master.tar.gz && tar -xf master.tar.gz
-	sed -e 's/<source>1.4</source>/<source>1.8</source>/g' temp/nailgun-master/pom.xml
-	sed -e 's/<target>1.4</target>/<target>1.8</target>/g' temp/nailgun-master/pom.xml
-	cd temp/nailgun-master && make ng && cd nailgun-server && mvn package
-	mkdir nailgun
-	mv temp/nailgun-master/nailgun-server/target/nailgun-server-0.9.2.jar nailgun/nailgun.jar
-	mv temp/nailgun-master/ng nailgun/ng
-	rm -fr temp
+# Init bootstraping
+	rm -fr "tmp"; mkdir -p "tmp" "nailgun"
+# Download latest Google Closure Compiler
+	curl -L -o "./tmp/denji-0.9.2.tgz" "https://github.com/denji/nailgun/archive/denji-0.9.2.tar.gz" \
+		&& tar -xf "tmp/denji-0.9.2.tgz" -C "./tmp/"
+# Maven building Nailgun-Server and "ng" binaries
+	make ng -C "./tmp/nailgun-denji-0.9.2" && mvn package --quiet -f "./tmp/nailgun-denji-0.9.2/nailgun-server/pom.xml"
+# Move nailgun-server-*.jar and "ng" binaries
+	mv "./tmp/nailgun-denji-0.9.2/nailgun-server/target/nailgun-server-0.9.2.jar" "./nailgun/nailgun.jar"
+	mv "./tmp/nailgun-denji-0.9.2/ng" "./nailgun/ng"
+# Cleanup
+	rm -fr "tmp"
 
 clean:
-	rm -rf bin/$(OUTFILE) bin/NailgunTest.class closure-compiler nailgun temp
+	rm -rf "bin/$(OUTFILE)" "bin/NailgunTest.class" "closure-compiler" "nailgun" "tmp"

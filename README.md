@@ -1,38 +1,43 @@
-fast-closure-compiler2 [![NPM version][npm-image]][npm-url]
+closure-gun [![NPM version][npm-image]][npm-url]
 ====
 
 This gets around the long startup time of [Google Closure Compiler](https://developers.google.com/closure/compiler/) using [Nailgun](http://www.martiansoftware.com/nailgun/), which runs a single java process in the background and keeps all of the classes loaded.
 
 ## Installation:
 
-* Required: `gcc` and `mvn`
-* Supported environment: Mac OS and Linux
+* Required: Maven (`mvn`) and C++ Compiler (`gcc` or `clang`)
+* Supported environment: OS X and Linux
 
-```console
-$ npm install fast-closure-compiler2
+```sh
+$ npm install closure-gun
 ```
 
 ## Usage:
 
-```console
-$ fastclosure --js script.js --js_output_file script.min.js
+```sh
+$ closure-gun --js script.js --js_output_file script.min.js
 ```
 
-## fast-closure-compiler2 vs. fast-closure-compiler
+#### closure-gun (fork fast-closure-compiler2) vs. fast-closure-compiler:
 
 Folked because the original [fast-closure-compiler](https://github.com/evanw/fast-closure-compiler) is not maintained.
 
 The advantages are:
 
 * Support latest Closure Compiler and Nailgun
-* Support Mac OS 10.9 and 10.10
-* Support Linux environment in addition to Mac OS
-* Expose `fastclosure` as global command instead of `closure`
+* Support OS X 10.9+ (tested 10.10/10.11)
+* Support Linux environment in addition to OS X
+* Expose `closure-gun` as global command instead of `closure`
 
 
-## License
+## License:
 
-MIT License: Teppei Sato &lt;teppeis@gmail.com&gt;
+[The MIT License (MIT)](http://denji.mit-license.org/)
 
-[npm-image]: https://img.shields.io/npm/v/fast-closure-compiler2.svg
-[npm-url]: https://npmjs.org/package/fast-closure-compiler2
+## Author:
+
+* Teppei Sato <teppeis@gmail.com>
+* Denis Denisov <denji@users.noreply.github.com>
+
+[npm-image]: https://img.shields.io/npm/v/closure-gun.svg
+[npm-url]: https://npmjs.org/package/closure-gun
