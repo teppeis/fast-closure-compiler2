@@ -29,7 +29,7 @@ nailgun:
 # Init bootstraping
 	rm -fr "tmp"; mkdir -p "tmp" "nailgun"
 # Download latest Google Closure Compiler
-	curl -L -o "./tmp/denji-0.9.2.tgz" "https://github.com/denji/nailgun/archive/denji-0.9.2.tar.gz" \
+	curl -L -o "./tmp/denji-0.9.2.tgz" "https://github.com/closure-gun/nailgun/archive/denji-0.9.2.tar.gz" \
 		&& tar -xf "tmp/denji-0.9.2.tgz" -C "./tmp/"
 # Maven building Nailgun-Server and "ng" binaries
 	make ng -C "./tmp/nailgun-denji-0.9.2" && mvn package --quiet -f "./tmp/nailgun-denji-0.9.2/nailgun-server/pom.xml"

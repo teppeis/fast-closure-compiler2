@@ -1,6 +1,6 @@
 {
   "name": "closure-gun",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "Make faster Google Closure-Compiler for NodeJS & io.js",
   "license": "MIT",
   "author": "Teppei Sato <teppeis@gmail.com>",
@@ -15,7 +15,7 @@
   "preferGlobal": "true",
   "repository": {
     "type": "git",
-    "url": "https://github.com/denji/closure-compiler-nailgun"
+    "url": "https://github.com/closure-gun/nailgun"
   },
   "scripts": {
     "install": "make install"
