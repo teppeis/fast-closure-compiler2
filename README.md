@@ -1,7 +1,7 @@
 closure-gun [![NPM version][npm-image]][npm-url]
 ====
 
-This gets around the long startup time of [Google Closure Compiler](https://developers.google.com/closure/compiler/) using [Nailgun](http://www.martiansoftware.com/nailgun/), which runs a single java process in the background and keeps all of the classes loaded.
+This gets around the long startup time of [Google Closure Compiler](https://developers.google.com/closure/compiler/) using [Nailgun](https://github.com/denji/nailgun), which runs a single java process in the background and keeps all of the classes loaded.
 
 ## Installation:
 
