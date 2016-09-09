@@ -21,7 +21,7 @@ closure-compiler:
 		&& tar -xf "./tmp/compiler-latest.tgz" -C "./tmp/closure-compiler"
 # Move compiler.jar
 	mkdir "closure-compiler"
-	mv "./tmp/closure-compiler/compiler.jar" "./closure-compiler/"
+	mv ./tmp/closure-compiler/closure-compiler-*.jar "./closure-compiler/compiler.jar"
 # Cleanup
 	rm -fr "tmp"
 

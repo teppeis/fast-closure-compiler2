@@ -19,5 +19,8 @@
   },
   "scripts": {
     "install": "make install"
+  },
+  "dependencies": {
+    "google-closure-compiler": "^20160822.1.0"
   }
 }
