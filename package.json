@@ -2,11 +2,13 @@
   "name": "fast-closure-compiler2",
   "description": "Make the Google Closure Compiler start faster",
   "preferGlobal": "true",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "bin": {
-      "fastclosure": "bin/closure"
+    "fastclosure": "bin/closure"
   },
-  "scripts": { "install": "make install" },
+  "scripts": {
+    "install": "make install"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/teppeis/fast-closure-compiler2"
