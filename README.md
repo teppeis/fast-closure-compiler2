@@ -1,3 +1,7 @@
+## *** DEPRECATED ***
+
+This package is deprecated. Use [closure-gun](https://www.npmjs.com/package/closure-gun "closure-gun") instead.
+
 fast-closure-compiler2 [![NPM version][npm-image]][npm-url]
 ====
 
